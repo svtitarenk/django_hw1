@@ -224,7 +224,7 @@ poetry add psycopg2-binary
 
 4. Настраиваем переменные окружения database.ini + config_db.py
 
-## Задание 2
+## Задание 2 и Задание 3
 1. Создаем модели Products and Category  
 описываем поля  
 Meta  
@@ -238,4 +238,10 @@ Migrations for 'catalog':
   catalog\migrations\0001_initial.py  
 4. Применяем миграцию 
 python manage.py migrate
-5. 
+5. push to GitHub
+
+## Задание 4
+1. внесите изменения в модель продукта, добавьте поле «Дата производства продукта» (`manufactured_at`), примените обновление структуры с помощью миграций;  
+2. python manage.py makemigrations
+3. python manage.py migrate  
+Создание и применение миграции с измененным полем в products
