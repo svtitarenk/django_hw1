@@ -54,6 +54,7 @@ class Product(models.Model):
         null=True,
         related_name="products",
     )
+    price = models.IntegerField(blank=True, null=True,)
     created_at = models.DateField(
         blank=True,
         null=True,
