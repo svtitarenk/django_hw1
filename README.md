@@ -245,3 +245,12 @@ python manage.py migrate
 2. python manage.py makemigrations
 3. python manage.py migrate  
 Создание и применение миграции с измененным полем в products
+
+
+python manage.py migrate catalog 0001  
+Operations to perform:  
+  Target specific migration: 0001_initial, from catalog  
+Running migrations:  
+  Rendering model states... DONE  
+  Unapplying catalog.0002_remove_product_date_change_and_more... OK
+
