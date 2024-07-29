@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.timezone import now
 
 
 # Create your models here.
@@ -54,24 +55,19 @@ class Product(models.Model):
         null=True,
         related_name="products",
     )
-    price = models.IntegerField(blank=True, null=True,)
-    created_at = models.DateField(
+    price = models.PositiveIntegerField(default=0,)
+    created_at = models.DateTimeField(
+        auto_now_add=now,
+        editable=False,
         blank=True,
-        null=True,
         verbose_name="дата создания",
         help_text="Укажите дату создания записи в БД",
     )
-    updated_at = models.DateField(
+    updated_at = models.DateTimeField(
+        auto_now_add=now,
         blank=True,
-        null=True,
         verbose_name="дата последнего изменения",
         help_text="Укажите дату изменения записи в БД",
-    )
-    manufactured_at = models.DateField(
-        blank=True,
-        null=True,
-        verbose_name='дата производства продукта',
-        help_text='введите дату производства продукта'
     )
 
     # Класс мета
