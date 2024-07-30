@@ -196,15 +196,16 @@ class Имя_МоделиAdmin(admin.ModelAdmin):
 
 
 # Настройка окружения (.env)
-импортируемый модуль для настройки окружения [django-environ](https://djangocentral.com/environment-variables-in-django/)
-пример файла для заполнения переменными окружения `database.example.ini`  
-После заполнения переименуйте в `database.ini`
-
-пример заполнения файла:  
-[postgresql]
-DATABASE_PASSWORD=your_password_without_quotes
-
-
+импортируемый модуль для настройки окружения - Библиотека для .env [python-decouple](https://pypi.org/project/python-decouple/)  
+создайте файл .env  
+пример заполнения файла находится в файле(.env.template):      
+[postgresql]  
+DATABASE_ENGINE=django.db.backends.postgresql  
+DATABASE_NAME=django_orm_products  
+DATABASE_USER=postgres  
+DATABASE_PASSWORD=your_password  
+DATABASE_HOST=localhost  
+DATABASE_PORT=5432
 
 ## шаги по задаче
 
@@ -217,7 +218,7 @@ DATABASE_PASSWORD=your_password_without_quotes
 ENGINE='django.db.backends.postgresql'  
 DATABASE_NAME='django_orm_products'  
 DATABASE_USER='postgres'  
-DATABASE_PASSWORD= params.get("database_password")
+DATABASE_PASSWORD= config("database_password")
 
 3. Устанавливаем библиотеку
 poetry add psycopg2-binary
