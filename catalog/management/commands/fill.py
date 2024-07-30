@@ -1,9 +1,10 @@
 from django.core.management import BaseCommand
 from catalog.models import Category, Product
-from config_db import ROOT_DIR
 import json
 import os
 
+ROOT_DIR = os.path.dirname(__file__)
+# catalog.json
 file_path = os.path.join(ROOT_DIR, 'catalog.json')
 
 

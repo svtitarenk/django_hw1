@@ -36,7 +36,7 @@ class Product(models.Model):
         verbose_name="наименование",
         help_text="введите наименование продукта",
     )
-    description = models.CharField(
+    description = models.TextField(
         max_length=100, verbose_name="описание", help_text="Введите описание продукта"
     )
     image = models.ImageField(
@@ -57,15 +57,13 @@ class Product(models.Model):
     )
     price = models.PositiveIntegerField(default=0,)
     created_at = models.DateTimeField(
-        auto_now_add=now,
+        auto_now_add=True,
         editable=False,
-        blank=True,
         verbose_name="дата создания",
         help_text="Укажите дату создания записи в БД",
     )
     updated_at = models.DateTimeField(
-        auto_now_add=now,
-        blank=True,
+        auto_now=True,
         verbose_name="дата последнего изменения",
         help_text="Укажите дату изменения записи в БД",
     )
