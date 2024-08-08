@@ -14,13 +14,16 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf import settings
-from django.conf.urls.static import static
-from django.contrib import admin
 from django.urls import path, include
+from blog.apps import BlogConfig
+from blog.views import BlogCreateView, BlogListView, BlogDetailView, BlogUpdateView, BlogDeleteView
+
+app_name = BlogConfig.name
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('catalog.urls', namespace='catalog')),
-    path('blog/', include('blog.urls', namespace='blog'))
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('create/', BlogCreateView.as_view(), name='create'),
+    path('', BlogListView.as_view(), name='list'),
+    path('view/<int:pk>/', BlogDetailView.as_view(), name='view'),
+    path('edit/<int:pk>/', BlogUpdateView.as_view(), name='edit'),
+    path('delete/<int:pk>/', BlogDeleteView.as_view(), name='delete'),
+]
