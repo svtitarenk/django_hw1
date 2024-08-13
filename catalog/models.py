@@ -55,7 +55,7 @@ class Product(models.Model):
         null=True,
         related_name="products",
     )
-    price = models.PositiveIntegerField(default=0,)
+    price = models.PositiveIntegerField(default=0, )
     created_at = models.DateTimeField(
         auto_now_add=True,
         editable=False,
@@ -77,3 +77,26 @@ class Product(models.Model):
     # строковое представление объекта
     def __str__(self):
         return f"{self.name} {self.category} {self.created_at}"
+
+
+class Version(models.Model):
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        verbose_name="Продукт",
+        help_text="Выберите продукт из списка",
+    )
+    version_number = models.PositiveIntegerField(
+        default=0
+    )
+    name = models.CharField(
+        max_length=100,
+        verbose_name="версия",
+        help_text="Введите версию продукта"
+    )
+    is_current = models.BooleanField(
+        default=False,
+        verbose_name="активная версия"
+    )

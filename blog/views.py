@@ -30,6 +30,7 @@ class BlogListView(ListView):
         queryset = queryset.filter(is_published=True)
         return queryset
 
+
 class BlogDetailView(DetailView):
     model = Blog
 
