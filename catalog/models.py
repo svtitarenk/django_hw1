@@ -100,3 +100,10 @@ class Version(models.Model):
         default=False,
         verbose_name="активная версия"
     )
+
+    class Meta:
+        verbose_name = "Версия"
+        verbose_name_plural = "Версии"
+
+    def __str__(self):
+        return f"{self.product.name} {self.version_number} {self.name}"

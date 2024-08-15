@@ -3,6 +3,7 @@
 {% block content %}
 <div class="row text-center">
     {% for product in object_list %}
+    {% if product.active_version != 'Нет активной версии' %}
     <div class="col-3">
         <div class="card mb-4 box-shadow">
             <div class="card-header">
@@ -23,6 +24,7 @@
             </div>
         </div>
     </div>
+    {% endif %}
     {% endfor %}
 </div>
 {% endblock %}
