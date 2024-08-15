@@ -12,8 +12,25 @@ class ProductList(ListView):
     extra_context = {
         'title': 'Главная страница'
     }
-    # продукты с текущей версией
-    product_with_current_version = Version.objects.filter(is_current=True).distinct()
+
+    def get_context_data(self, *args, **kwargs):
+        context_data = super().get_context_data(*args, **kwargs)
+        products = self.get_queryset(*args, **kwargs)
+
+        for product in products:
+            # Фильтруем версии по текущему продукту и только текущие версии
+            active_versions = Version.objects.filter(product=product, is_current=True)
+
+            if active_versions.exists():
+                # Берем последнюю из текущих версий
+                product.active_version = active_versions.last()
+            else:
+                # Устанавливаем сообщение, если активных версий нет
+                product.active_version = 'Нет активной версии'
+
+        # Обновляем список объектов в контексте (потом добавляем в шаблоне if active_versions != 'Нет активной версии'
+        context_data['object_list'] = products
+        return context_data
 
 
 class ProductCreate(CreateView):
