@@ -2,6 +2,7 @@ import secrets
 import random
 import string
 
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
 from django.core.mail import send_mail
 from django.shortcuts import render, get_object_or_404, redirect
@@ -10,7 +11,7 @@ from django.utils.crypto import get_random_string
 from django.views.generic import CreateView
 
 from config.settings import EMAIL_HOST_USER
-from users.forms import UserRegisterForm
+from users.forms import UserRegisterForm, UserProfileForm
 from users.models import User
 
 
@@ -96,3 +97,16 @@ def randompassword():
     size = random.randint(8, 12)
     new_password = ''.join(random.choice(chars) for x in range(size))
     return new_password
+
+
+@login_required
+def edit_profile(request):
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = UserProfileForm(instance=request.user)
+
+    return render(request, 'edit_profile.html', {'form': form})
