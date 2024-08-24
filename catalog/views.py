@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import inlineformset_factory
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
@@ -33,10 +34,20 @@ class ProductList(ListView):
         return context_data
 
 
-class ProductCreate(CreateView):
+class ProductCreate(CreateView, LoginRequiredMixin):
     model = Product
     form_class = ProductForm
     success_url = reverse_lazy('catalog:product_list')
+
+    def form_valid(self, form):
+        product = form.save()  # сохраняем продукт
+        # чтобы владелец был только авторизованный пользователь, добавляем LoginRequiredMixin.
+        # авторизованного пользователя можно получить из запроса
+        user = self.request.user
+        product.owner = user
+        product.save()
+
+        return super().form_valid(form)
 
 
 class ProductUpdate(UpdateView):

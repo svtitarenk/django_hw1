@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.timezone import now
 
+from users.models import User
+
 
 # Create your models here.
 
@@ -66,6 +68,14 @@ class Product(models.Model):
         auto_now=True,
         verbose_name="дата последнего изменения",
         help_text="Укажите дату изменения записи в БД",
+    )
+    owner = models.ForeignKey(
+        User,
+        verbose_name="Владелец",
+        help_text="Укажите владельца продукта",
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL,
     )
 
     # Класс мета
