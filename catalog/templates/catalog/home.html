@@ -57,6 +57,7 @@
                 <ul class="list-unstyled text-small">
                     {% if user.is_authenticated %}
                     <li><a href="{% url 'users:logout' %}" class="text-muted">Выход</a></li>
+                    <li><a href="{% url 'users:edit_profile' %}" class="text-muted">Редактирование профиля</a></li>
                     {% else %}
                     <li><a href="{% url 'users:login' %}" class="text-muted">Вход</a></li>
                     <li><a href="{% url 'users:register' %}" class="text-muted">Регистрация</a></li>

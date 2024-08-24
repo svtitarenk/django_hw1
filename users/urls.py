@@ -15,5 +15,6 @@ urlpatterns = [
     path('email-confirm/<str:token>/', email_verification, name='email-confirm'),
     path('password-reset/', views.password_reset, name='password_reset'),
     path('password-reset/done/', views.password_reset_done, name='password_reset_done'),
+    path('profile/edit/', views.edit_profile, name='edit_profile'),
 ]
 

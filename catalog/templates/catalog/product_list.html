@@ -5,22 +5,29 @@
     {% for product in object_list %}
     {% if product.active_version != 'Нет активной версии' %}
     <div class="col-3">
-        <div class="card mb-4 box-shadow">
+        <div class="card card h-100 mb-4 box-shadow" style="width: 18rem;">
             <div class="card-header">
                 <h4 class="my-0 font-weight-normal">{{ product.name }}</h4>
             </div>
             <div class="card-body">
-                <img class="card-img-top" src="{{ product.image | media_filter }}">
+                <img class="object-fit-scale border rounded" height="200" width="200"
+                     src="{{ product.image | media_filter }}">
                 <h1 class="card-title pricing-card-title">{{ product.price }} руб.</h1>
                 <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                     <li>- {{ product.description }}</li>
                 </ul>
-                <a href="{% url 'catalog:product_detail' product.pk %}" type="button"
-                   class="btn btn-lg btn-block btn-outline-primary">View</a>
-                <a href="{% url 'catalog:product_update' product.pk %}" type="button"
-                   class="btn btn-lg btn-block btn-outline-primary">Edit</a>
-                <a href="{% url 'catalog:product_delete' product.pk %}" type="button"
-                   class="btn btn-lg btn-block btn-outline-primary">Delete</a>
+                <div class="footer text-body-secondary">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group position-absolute bottom-0 mb-2 start-50 translate-middle-x">
+                          <a href="{% url 'catalog:product_detail' product.pk %}" type="button"
+                               class="btn btn-lg btn-block btn-outline-primary">View</a>
+                            <a href="{% url 'catalog:product_update' product.pk %}" type="button"
+                               class="btn btn-lg btn-block btn-outline-primary">Edit</a>
+                            <a href="{% url 'catalog:product_delete' product.pk %}" type="button"
+                               class="btn btn-lg btn-block btn-outline-primary">Delete</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
