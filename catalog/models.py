@@ -77,12 +77,22 @@ class Product(models.Model):
         null=True,
         on_delete=models.SET_NULL,
     )
+    is_published = models.BooleanField(
+        default=False,
+        verbose_name='Опубликовано?',
+        help_text='Опубликовано True/False'
+    )
 
     # Класс мета
     class Meta:
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
         ordering = ["category", "name"]
+        permissions = [
+            ("can_change_is_published", "Can change is_published"),
+            ("can_change_description", "Can change description"),
+            ("can_change_category", "Can change category"),
+        ]
 
     # строковое представление объекта
     def __str__(self):
