@@ -7,6 +7,7 @@ from django.views.generic import ListView, DetailView, TemplateView, CreateView,
 
 from catalog.forms import ProductForm, VersionForm, ProductModeratorForm
 from catalog.models import Product, Version
+from catalog.services import get_product_list_from_cache
 
 
 class ProductList(ListView):
@@ -14,6 +15,10 @@ class ProductList(ListView):
     extra_context = {
         'title': 'Главная страница'
     }
+
+    def get_queryset(self):
+        # возвращаем всех собак, которые прошли в кэш или БД (если кэша нет) (dogs.services)
+        return get_product_list_from_cache()
 
     def get_context_data(self, *args, **kwargs):
         context_data = super().get_context_data(*args, **kwargs)
