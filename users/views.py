@@ -62,6 +62,10 @@ def password_reset(request):
             # new_password = get_random_string(length=12)
             # print('randompassword', randompassword)
             user.password = make_password(new_password)
+
+            # Генерировать пароль можно проще (из замечания к ДЗ 22.2 Аутентификация)
+            # User.objects.make_random_password()
+
             # print('user.password', user.password)
             # получаем токен откуда пришел пользователь
             host = request.get_host()

@@ -50,6 +50,11 @@ class ProductCreate(CreateView, LoginRequiredMixin):
 
         return super().form_valid(form)
 
+    # альтернативное решение по привязке owner к продукту
+    # def form_valid(self, form):
+    #     form.instance.owner = self.request.user
+    #     return super().form_valid(form)
+
 
 class ProductUpdate(LoginRequiredMixin, UpdateView):
     model = Product
